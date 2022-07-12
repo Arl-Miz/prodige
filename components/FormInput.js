@@ -13,26 +13,33 @@ const FormInput = (props) => {
           marginBottom: 5,
         }}
       >
-        <Text style={{ fontWeight: "bold" }}>{label}</Text>
+        <Text style={{ fontWeight: "bold", color: "#eaeaea" }}>{label}</Text>
         {error ? (
           <Text style={{ color: "red", fontSize: 16 }}>{error}</Text>
         ) : null}
       </View>
-      <TextInput {...props} placeholder={placeholder} style={styles.input} />
+      <TextInput
+        {...props}
+        placeholderTextColor="#ffffff63"
+        placeholder={placeholder}
+        style={styles.input}
+      />
     </>
   );
 };
 
 const styles = StyleSheet.create({
   input: {
-    width: "90%",
+    width: "80%",
     borderWidth: 1,
-    borderColor: "#1b1b33",
+    borderColor: "#ffffff",
     height: 35,
+    color: "#5bbda5",
     borderRadius: 8,
     fontSize: 16,
     paddingLeft: 10,
     marginBottom: 20,
+    marginTop: 4,
   },
 });
 

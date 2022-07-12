@@ -1,9 +1,8 @@
 import * as React from "react";
 import { useRef, useState, useEffect } from "react";
-import { useNavigation } from "@react-navigation/native";
 import {
   StyleSheet,
-  TouchableOpacity,
+  Button,
   Animated,
   Dimensions,
   Image,
@@ -17,14 +16,14 @@ const API_URL = "https://picsum.photos/v2/list?limit=5";
 const Images = [
   {
     id: 0,
-    title: "somethingsomething",
+    title: "Explore the world!!",
     descriptions:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti cum beatae, perspiciatis tenetur unde dolores?",
     url: "https://cdn-icons-png.flaticon.com/512/4359/4359857.png",
   },
   {
     id: 1,
-    title: "somethingsomething",
+    title: "Play with your friends!!",
     descriptions:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti cum beatae, perspiciatis tenetur unde dolores?",
     url: "https://cdn-icons-png.flaticon.com/512/6064/6064971.png",
@@ -32,21 +31,21 @@ const Images = [
   {
     id: 2,
 
-    title: "somethingsomething",
+    title: "Learn new things with US!!",
     descriptions:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti cum beatae, perspiciatis tenetur unde dolores?",
     url: "https://cdn-icons-png.flaticon.com/512/6397/6397070.png",
   },
   {
     id: 3,
-    title: "somethingsomething",
+    title: "build new stuff!",
     descriptions:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti cum beatae, perspiciatis tenetur unde dolores?",
     url: "https://cdn-icons-png.flaticon.com/512/4105/4105448.png",
   },
   {
     id: 4,
-    title: "somethingsomething",
+    title: "Enjoy",
     descriptions:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti cum beatae, perspiciatis tenetur unde dolores?",
     url: "https://cdn-icons-png.flaticon.com/512/5020/5020506.png",
@@ -55,8 +54,7 @@ const Images = [
 const bgc = ["#A5BBFF", "#DDBEFE", "#FF63ED", "#B98EFF"];
 const { width, height } = Dimensions.get("screen");
 
-const Home = () => {
-  const navigation = useNavigation();
+const Home = ({ navigation }) => {
   const scrollX = useRef(new Animated.Value(0)).current;
   return (
     <View style={styles.container}>
@@ -87,21 +85,33 @@ const Home = () => {
                 >
                   {item.descriptions}
                 </Text>
-                <TouchableOpacity onPress={() => navigation.navigate("Tabs")}>
-                  <View style={styles.circleGradient}>
-                    <Text style={styles.visit}>Tabs</Text>
-                  </View>
-                </TouchableOpacity>
               </View>
             </View>
           );
         }}
       />
       <Indicator scrollX={scrollX} />
+      <Tabs navigation={navigation} />
     </View>
   );
 };
 
+const Tabs = ({ navigation }) => {
+  return (
+    // <TouchableOpacity onPress={() => navigation.navigate("Tabs")}>
+    //   <View style={styles.circleGradient}>
+    //     <Text style={styles.visit}>Tabs</Text>
+    //   </View>
+    // </TouchableOpacity>
+    <View style={styles.circleGradient}>
+      <Button
+        color="#000000"
+        title="Get started"
+        onPress={() => navigation.navigate("Tabs")}
+      />
+    </View>
+  );
+};
 const Indicator = ({ scrollX }) => {
   return (
     <Animated.View
@@ -180,8 +190,10 @@ const BackSet = ({ scrollX }) => {
 
 const styles = StyleSheet.create({
   circleGradient: {
-    backgroundColor: "#ffffff",
-    borderRadius: 15,
+    position: "absolute",
+    bottom: 40,
+    width: "80%",
+    backgroundColor: "#000000aa",
   },
   visit: {
     margin: 4,

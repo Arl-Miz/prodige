@@ -39,7 +39,7 @@ const Capitalize = (word) => {
     .join("");
 };
 
-const SignIn = ({ navigation }) => {
+const SignUp = ({ navigation }) => {
   const { width, height } = useWindowDimensions();
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -69,7 +69,6 @@ const SignIn = ({ navigation }) => {
             }}
             validationSchema={validation}
             onSubmit={(values, formikActions) => {
-              navigation.navigate("Home");
               console.log(values);
               Alert.alert(
                 `hi ${Capitalize(values.fullName)} !`,
@@ -98,6 +97,14 @@ const SignIn = ({ navigation }) => {
                 }}
               >
                 <FormInput
+                  error={props.touched.fullName && props.errors.fullName}
+                  onChangeText={props.handleChange("fullName")}
+                  onBlur={props.handleBlur("fullName")}
+                  value={props.values.fullName}
+                  label="Full Name"
+                  placeholder="example name"
+                />
+                <FormInput
                   error={props.touched.email && props.errors.email}
                   onChangeText={props.handleChange("email")}
                   onBlur={props.handleBlur("email")}
@@ -114,6 +121,18 @@ const SignIn = ({ navigation }) => {
                   placeholder="********"
                   secureTextEntry
                 />
+                <FormInput
+                  error={
+                    props.touched.confirmPassword &&
+                    props.errors.confirmPassword
+                  }
+                  onChangeText={props.handleChange("confirmPassword")}
+                  onBlur={props.handleBlur("confirmPassword")}
+                  label="confirm passwoed"
+                  value={props.values.confirmPassword}
+                  placeholder="********"
+                  secureTextEntry
+                />
                 {/* <View style={styles.container}> */}
                 <View style={styles.btn_container}>
                   {/* <View style={{ position: "absolute", left: 40, width: 110 }}> */}
@@ -124,11 +143,13 @@ const SignIn = ({ navigation }) => {
                   />
                 </View>
                 <TouchableOpacity
-                  onPress={() => navigation.navigate("SignUp")}
+                  onPress={() => navigation.navigate("SignIn")}
                   //   onPress={() => navigation.navigate("SignUp")}
                 >
                   <View>
-                    <Text style={{ color: "#6a97e5" }}>have an account?</Text>
+                    <Text style={{ color: "#6a97e5" }}>
+                      Don't have an account?
+                    </Text>
                   </View>
                 </TouchableOpacity>
               </View>
@@ -140,7 +161,7 @@ const SignIn = ({ navigation }) => {
   );
 };
 
-export default SignIn;
+export default SignUp;
 
 const styles = StyleSheet.create({
   circleGradient: {

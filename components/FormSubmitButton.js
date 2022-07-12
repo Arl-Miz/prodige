@@ -2,9 +2,7 @@ import React from "react";
 import { View, StyleSheet, TouchableOpacity, Text } from "react-native";
 
 const FormSubmitButton = ({ title, submitting, onPress }) => {
-  const backgroundColor = submitting
-    ? "rgba(27,27,51,0.4)"
-    : "rgba(27,27,51,1)";
+  const backgroundColor = submitting ? "#243f44" : "#3c6a72";
 
   return (
     <TouchableOpacity
@@ -20,6 +18,7 @@ const styles = StyleSheet.create({
   container: {
     height: 45,
     borderRadius: 8,
+    width: 100,
     justifyContent: "center",
     alignItems: "center",
   },
