@@ -18,14 +18,16 @@ const CustomDrawer = (props) => {
     <View style={{ flex: 1 }}>
       <DrawerContentScrollView
         {...props}
-        contentContainerStyle={{ backgroundColor: "#8200d6" }}
+        contentContainerStyle={{
+          backgroundColor: "#d84552eb",
+        }}
       >
         <ImageBackground
-          //   source={require("../assets/sign_in_nF.png")}
+          //   source={require("../../assets/splash.png")}
           style={{ padding: 20 }}
         >
           <Image
-            source={require("../assets/Avatar.png")}
+            source={require("../../assets/Avatar.png")}
             style={{
               height: 80,
               width: 80,
@@ -54,7 +56,14 @@ const CustomDrawer = (props) => {
             {/* <FontAwesome5 name="coins" size={14} color="#fff" /> */}
           </View>
         </ImageBackground>
-        <View style={{ flex: 1, backgroundColor: "#fff", paddingTop: 10 }}>
+        <View
+          style={{
+            flex: 1,
+            backgroundColor: "#fff",
+            paddingTop: 10,
+            borderTopRightRadius: 50,
+          }}
+        >
           <DrawerItemList {...props} />
         </View>
       </DrawerContentScrollView>
