@@ -25,7 +25,7 @@ import { GloabalContext } from "../context/ContextProvider";
 
 // const TASKS = TITLES.map((title, index) => ({ title, index }));
 
-const BACKGROUND_COLOR = "#FAFBFF";
+const BACKGROUND_COLOR = "#6ee7e777";
 
 const Todo = ({ navigation }) => {
   const { tasks } = useContext(GloabalContext);
@@ -56,7 +56,9 @@ const Todo = ({ navigation }) => {
             paddingHorizontal: 20,
           }}
         >
-          <Text style={styles.title}>Todos</Text>
+          <View style={{ left: "150%" }}>
+            <Text style={styles.title}>Todos</Text>
+          </View>
           <TouchableOpacity onPress={() => navigation.navigate("addForm")}>
             <FontAwesome5 name={"plus"} size={40} color={"#333"} />
           </TouchableOpacity>
@@ -79,7 +81,7 @@ const Todo = ({ navigation }) => {
         >
           <TouchableOpacity
             style={{ ...styles.btn }}
-            onPress={() => navigation.navigate("home")}
+            onPress={() => navigation.navigate("btms")}
           >
             <View style={{ alignItems: "center" }}>
               <Text style={styles.btn_txt}>Go Home</Text>
@@ -104,7 +106,7 @@ const styles = StyleSheet.create({
     // position: "absolute",
 
     width: "80%",
-    backgroundColor: "#e0e0e0",
+    backgroundColor: "#5dd28a55",
     borderRadius: 90,
   },
   btn_txt: {

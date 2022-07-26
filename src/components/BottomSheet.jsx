@@ -33,7 +33,7 @@ const BottomSheet = React.forwardRef(({ children }, ref) => {
     isActive,
   ]);
 
-  const context = useSharedValue({ y: 0 });
+  const context = useSharedValue({ y: 30 });
   const gesture = Gesture.Pan()
     .onStart(() => {
       context.value = { y: translateY.value };
@@ -44,7 +44,7 @@ const BottomSheet = React.forwardRef(({ children }, ref) => {
     })
     .onEnd(() => {
       if (translateY.value > -SCREEN_HEIGHT / 3) {
-        scrollTo(0);
+        scrollTo(30);
       } else if (translateY.value < -SCREEN_HEIGHT / 1.5) {
         scrollTo(MAX_TRANSLATE_Y);
       }
@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
   bottomSheetContainer: {
     height: SCREEN_HEIGHT,
     width: "100%",
-    backgroundColor: "white",
+    backgroundColor: "#ebebeb",
     position: "absolute",
     top: SCREEN_HEIGHT,
     borderRadius: 25,

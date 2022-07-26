@@ -19,9 +19,9 @@ export interface SlideProps {
 const Slide = ({
   slide: { picture, color, title, description },
 }: SlideProps) => {
-  let [fontsLoaded] = useFonts({
-    EduVICWANTBeginner: require("../../assets/fonts/EduVICWANTBeginner-VariableFont_wght.ttf"),
-  });
+  //   let [fontsLoaded] = useFonts({
+  //     EduVICWANTBeginner: require("../../assets/fonts/EduVICWANTBeginner-VariableFont_wght.ttf"),
+  //   });
   const lighterColor = Color(color).lighten(0.94).toString();
   return (
     <>
@@ -67,13 +67,13 @@ const styles = StyleSheet.create({
     color: "white",
     textAlign: "center",
     marginBottom: 16,
-    fontFamily: "EduVICWANTBeginner",
+    // fontFamily: "EduVICWANTBeginner",
   },
   description: {
     fontSize: 18,
     color: "white",
     textAlign: "center",
-    fontFamily: "EduVICWANTBeginner",
+    // fontFamily: "EduVICWANTBeginner",
   },
 });
 

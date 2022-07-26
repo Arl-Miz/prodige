@@ -6,45 +6,29 @@ import Slide from "./Slide";
 const slides = [
   {
     color: "#aa69ebe8",
-    title: "Dessert Recipes",
+    title: "hot codes",
     description:
-      "Hot or cold, our dessert recipes can turn an average meal into a memorable event",
+      "Any fool can write code that a computer can understand. Good programmers write code that humans can understand.",
     picture: require("../../assets/lottie/coding-1.json"),
   },
   {
     color: "#54b9ba",
-    title: "Healthy Foods",
-    description:
-      "Discover healthy recipes that are easy to do with detailed cooking instructions from top chefs",
+    title: "slim workplace",
+    description: "First, solve the problem. Then, write the code.",
     picture: require("../../assets/lottie/coding-2.json"),
   },
   {
     color: "#80d781f1",
-    title: "Easy Meal Ideas",
-    description:
-      "explore recipes by food type, preparation method, cuisine, country and more",
+    title: "Work Now!",
+    description: "Experience is the name everyone gives to their mistakes.",
     picture: require("../../assets/lottie/coding-3.json"),
-  },
-  {
-    color: "#d02435c9",
-    title: "10000+ Recipes",
-    description:
-      "Browse thousands of curated recipes from top chefs, each with detailled cooking instructions",
-    picture: require("../../assets/lottie/coding-4.json"),
-  },
-  {
-    color: "#ed4cffe8",
-    title: "Video Tutorials",
-    description:
-      "Browse our best themed recipes, cooking tips, and how-to food video & photos",
-    picture: require("../../assets/lottie/coding-5.json"),
   },
 ];
 
 export const assets = slides.map(({ picture }) => picture);
 
 const LiquidSwipe = () => {
-  const [index, setIndex] = useState(2);
+  const [index, setIndex] = useState(1);
   const prev = slides[index - 1];
   const next = slides[index + 1];
   return (

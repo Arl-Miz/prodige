@@ -22,7 +22,7 @@ export default function BtmS() {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <View style={styles.container}>
-        <StatusBar style="light" />
+        <StatusBar style="dark" />
         <View
           style={{
             flex: 1,
@@ -55,7 +55,7 @@ export default function BtmS() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#df5fff8a",
+    backgroundColor: "#ffffff",
     alignItems: "center",
     justifyContent: "center",
   },

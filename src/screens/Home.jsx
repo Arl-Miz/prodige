@@ -78,7 +78,7 @@ const Home = ({ navigation }) => {
             cx={width / 2}
             cy={height / 2}
             r={R}
-            stroke={"#ff0000d6"}
+            stroke={"#e6366ad5"}
             strokeWidth={35}
             strokeDasharray={1000}
             animatedProps={animatedProps}
@@ -118,7 +118,7 @@ const styles = StyleSheet.create({
   },
   txt: {
     position: "absolute",
-    bottom: height / 2.5,
+    top: height / 1.9,
     fontSize: 60,
     color: "#325eb1",
     width: 200,

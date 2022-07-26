@@ -1,11 +1,12 @@
 import "react-native-gesture-handler";
 import React, { useContext } from "react";
-import { LogBox } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 const Drawer = createDrawerNavigator();
 const Stack = createNativeStackNavigator();
+// import { LogBox } from "react-native";
+import "./ignoreWarnings";
 
 // import { Provider } from "react-redux";
 // import store from "./src/screens/Todo/store";
@@ -19,7 +20,7 @@ import { ContextProvider } from "./src/context/ContextProvider";
 import LiquidSwipe from "./src/LiquidSwipe/index";
 import BtmS from "./src/screens/BtmS";
 
-LogBox.ignoreAllLogs();
+// LogBox.ignoreAllLogs();
 
 const App = () => {
   return (
@@ -27,8 +28,8 @@ const App = () => {
       <NavigationContainer>
         <Stack.Navigator screenOptions={{ headerShown: false }}>
           {/* <Stack.Screen name="ls" component={LiquidSwipe} /> */}
-          <Stack.Screen name="btms" component={BtmS} />
           <Stack.Screen name="home" component={Home} />
+          <Stack.Screen name="btms" component={BtmS} />
           <Stack.Screen name="todo" component={Todo} />
           <Stack.Screen name="lott" component={Lott} />
           <Stack.Screen name="addForm" component={AddForm} />
