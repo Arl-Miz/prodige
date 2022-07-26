@@ -1,119 +1,107 @@
 import {
-  Image,
-  ScrollView,
+  Dimensions,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
 } from "react-native";
-import React, { useContext, useState } from "react";
-import Ionicons from "react-native-vector-icons/Ionicons";
+import React, { useCallback, useEffect } from "react";
+import Svg, { Circle, G } from "react-native-svg";
+import Animated, {
+  useAnimatedProps,
+  useDerivedValue,
+  useSharedValue,
+  withTiming,
+} from "react-native-reanimated";
+import { ReText } from "react-native-redash";
+import AnimatedLottieView from "lottie-react-native";
+const { width, height } = Dimensions.get("screen");
+const R = 700 / (2 * Math.PI);
 
-import { GloabalContext } from "../context/ContextProvider";
-import { faker } from "@faker-js/faker";
-import menusi from "../context/menus";
+const AnimatedCircle = Animated.createAnimatedComponent(Circle);
 
-const menus = menusi;
-const Home = ({ navigation, route }) => {
-  const [like, setLike] = useState(false);
+const Home = ({ navigation }) => {
+  const progress = useSharedValue(0);
 
-  const { addItem } = useContext(GloabalContext);
+  useEffect(() => {
+    progress.value = withTiming(1, { duration: 2500 });
+  }, []);
+  const reCall = useCallback(() => {
+    progress.value = withTiming(progress.value > 0 ? 0 : 1, { duration: 2500 });
+  }, []);
 
-  const Add = (item) => {
-    const theItem = menus.filter((i) => i.id === item);
-    addItem(theItem[0]);
-  };
+  const animatedProps = useAnimatedProps(() => ({
+    strokeDashoffset: 700 * (progress.value * -1),
+  }));
 
-  const items = route.params;
+  const progressTxt = useDerivedValue(() => {
+    return `${Math.floor(progress.value * 100)}`;
+  });
+
   return (
-    <View>
-      <View style={styles.header}>
-        <Ionicons name="chevron-back" size={30} onPress={navigation.goBack} />
-        <Text style={{ fontSize: 20, fontWeight: "bold" }}>Details</Text>
-      </View>
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <View
-          style={{
-            justifyContent: "center",
-            alignItems: "center",
-            height: 290,
-          }}
-        >
-          <Image
-            source={{ uri: items.food }}
-            style={{ width: 220, height: 220, borderRadius: 190 }}
+    <View style={styles.container}>
+      <ReText style={styles.txt} text={progressTxt} />
+
+      <View
+        style={{
+          flex: 1,
+          alignItems: "center",
+          justifyContent: "center",
+          marginBottom: "30%",
+          //   width: 330,
+          //   height: 330,
+          //   backgroundColor: "red",
+        }}
+      >
+        <View style={{ position: "absolute", top: height / 2.5 }}>
+          <AnimatedLottieView
+            source={require("../../assets/lottie/wave-animation.json")}
+            style={[{ width: "100%", aspectRatio: 1 }]}
+            autoPlay
+            loop
+            // {...lottieProps}
           />
         </View>
-        <View
-          style={{
-            backgroundColor: "#dd517b",
-            paddingHorizontal: 20,
-            paddingTop: 40,
-            paddingBottom: 60,
-            borderTopRightRadius: 40,
-            borderTopLeftRadius: 40,
-          }}
-        >
-          <View
-            style={{
-              flexDirection: "row",
-              alignItems: "center",
-              justifyContent: "space-between",
-            }}
-          >
-            <Text style={{ fontSize: 25, fontWeight: "bold", color: "black" }}>
-              {items.name}
-            </Text>
-            <View
-              style={{
-                backgroundColor: "#fff",
-                height: 50,
-                width: 50,
-                justifyContent: "center",
-                alignItems: "center",
-                borderRadius: 30,
-              }}
-            >
-              <TouchableOpacity
-                activeOpacity={0.7}
-                onPress={() => setLike(!like)}
-              >
-                {like == true ? (
-                  <Ionicons name="heart" color={"red"} size={34} />
-                ) : (
-                  <Ionicons name="heart-outline" color={"red"} size={34} />
-                )}
-              </TouchableOpacity>
-            </View>
-          </View>
-          <Text style={{ marginTop: 10, lineHeight: 22, fontSize: 16 }}>
-            or u excited if come him great water want pleasure prudent rapid
-            happening hope him jennings ecstatic though wooded are an and
-            strangers believe what like more new Not greatest so true preserved
-            on thanks attacks tended barton formed saw unknown yet or how but
-            half eat from found simplicity So built with finished mr can ask
-            Projecting china it too agreed when simplicity Sportsman His
-            relation an fact old Winter many how men Necessary he directly going
-            Chicken juvenile temper bred are not mean shameless off Full next
-            about speaking check as any like led other genius or pleasure
-            favourite besides wound may as would ought hundred
-          </Text>
-          <TouchableOpacity activeOpacity={0.8} onPress={() => Add(items.id)}>
-            <View
-              style={{
-                alignItems: "center",
-                justifyContent: "center",
-                backgroundColor: "#d8bd43",
-                marginVertical: 20,
-                height: 60,
-                borderRadius: 40,
-              }}
-            >
-              <Text>Add To Cart!!</Text>
-            </View>
-          </TouchableOpacity>
+        <Text>hello</Text>
+      </View>
+      <Svg>
+        <G>
+          <Circle
+            cx={width / 2}
+            cy={height / 2}
+            r={R}
+            stroke={"#ff0000d6"}
+            strokeWidth={35}
+            strokeOpacity={0.2}
+          />
+          <AnimatedCircle
+            cx={width / 2}
+            cy={height / 2}
+            r={R}
+            stroke={"#ff0000d6"}
+            strokeWidth={35}
+            strokeDasharray={1000}
+            animatedProps={animatedProps}
+            strokeLinecap={"round"}
+          />
+        </G>
+      </Svg>
+      <TouchableOpacity
+        style={{ bottom: "10%", ...styles.btn }}
+        onPress={() => reCall()}
+      >
+        <View style={{ alignItems: "center" }}>
+          <Text style={styles.btn_txt}>Start</Text>
         </View>
-      </ScrollView>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={{ top: "10%", ...styles.btn }}
+        onPress={() => navigation.navigate("todo")}
+      >
+        <View style={{ alignItems: "center" }}>
+          <Text style={styles.btn_txt}>Todos</Text>
+        </View>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -121,10 +109,29 @@ const Home = ({ navigation, route }) => {
 export default Home;
 
 const styles = StyleSheet.create({
-  header: {
-    paddingVertical: " 12%",
-    flexDirection: "row",
+  container: {
+    flex: 1,
+    justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#e4e4e4f",
+
+    backgroundColor: "#fad46c",
+  },
+  txt: {
+    position: "absolute",
+    bottom: height / 2.5,
+    fontSize: 60,
+    color: "#325eb1",
+    width: 200,
+    textAlign: "center",
+  },
+  btn: {
+    position: "absolute",
+
+    width: width / 1.5,
+    backgroundColor: "#e0e0e0",
+    borderRadius: 90,
+  },
+  btn_txt: {
+    fontSize: 40,
   },
 });

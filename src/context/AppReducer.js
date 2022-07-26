@@ -3,12 +3,15 @@ export default (state, action) => {
         case "REMOVE_ITEM":
             return {
                 ...state,
-                menu: state.menu.filter((item) => item.id !== action.payload),
+                tasks: state.tasks.filter((item) => item.id !== action.payload),
             };
         case "ADD_ITEM":
+            // console.log(state);
+            const newTitle = { title: action.payload };
             return {
                 ...state,
-                menu: [action.payload, ...state.menu],
+                tasks: [...state.tasks, newTitle],
+                // tasks: [...state.tasks, title:action.payload],
             };
 
         default:
