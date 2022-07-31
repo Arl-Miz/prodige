@@ -16,7 +16,7 @@ const { width: SCREEN_WIDTH } = Dimensions.get("window");
 const TRANSLATE_X_THRESHOLD = -SCREEN_WIDTH * 0.3;
 
 const ListItem = ({ task, onDismiss, simultaneousHandlers }) => {
-  //   console.log(task);
+  //   console.log(onDismiss());
   const translateX = useSharedValue(0);
   const itemHeight = useSharedValue(LIST_ITEM_HEIGHT);
   const marginVertical = useSharedValue(10);
@@ -84,7 +84,7 @@ const ListItem = ({ task, onDismiss, simultaneousHandlers }) => {
         onGestureEvent={panGesture}
       >
         <Animated.View style={[styles.task, rStyle]}>
-          <Text style={styles.taskTitle}>{task.title}</Text>
+          <Text style={styles.taskTitle}>{task.value}</Text>
         </Animated.View>
       </PanGestureHandler>
     </Animated.View>

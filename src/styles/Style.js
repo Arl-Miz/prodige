@@ -6,6 +6,9 @@ export default StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
     },
+    txt: {
+        fontSize: 30,
+    },
     button: {
         borderRadius: 9,
         backgroundColor: "#e29c9c",

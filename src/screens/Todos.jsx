@@ -24,22 +24,54 @@ import { FontAwesome5 } from "@expo/vector-icons";
 import { GloabalContext } from "../context/ContextProvider";
 
 // const TASKS = TITLES.map((title, index) => ({ title, index }));
+import * as SQLite from "expo-sqlite";
+
+function openDatabase() {
+  if (Platform.OS === "web") {
+    return {
+      transaction: () => {
+        return {
+          executeSql: () => {},
+        };
+      },
+    };
+  }
+
+  const db = SQLite.openDatabase("db.db");
+  return db;
+}
+
+const db = openDatabase();
 
 const BACKGROUND_COLOR = "#6ee7e777";
 
 const Todo = ({ navigation }) => {
-  const { tasks } = useContext(GloabalContext);
-  //   console.log(tasks);
+  // const { tasks } = useContext(GloabalContext);
   const [tsks, setTsks] = useState([]);
   useEffect(() => {
-    setTsks(tasks);
-  }, [tasks]);
-  const onDismiss = useCallback((task) => {
-    // console.log(task);
-    // setTsks((tasks) =>
-    //   tasks.filter((item) => tsks.indexOf(item) !== tsks.indexOf(task))
-    // );
-  }, []);
+    db.transaction((tx) => {
+      tx.executeSql(`select * from items ;`, [], (_, { rows: { _array } }) => {
+        setTsks(_array);
+        // console.log(_array);
+      });
+    });
+  }, [tsks]);
+  //   console.log(tasks);
+  //   useEffect(() => {
+  //     setTsks(tasks);
+  //   }, [tasks]);
+  const onDismiss = (item) => {
+    // console.log(item);
+    db.transaction((tx) => {
+      tx.executeSql(`delete from items where id = ?;`, [item]);
+    });
+  };
+  // useCallback((task) => {
+  // console.log(task);
+  // setTsks((tasks) =>
+  //   tasks.filter((item) => tsks.indexOf(item) !== tsks.indexOf(task))
+  // );
+  //   }, []);
 
   const scrollRef = useRef(null);
 
@@ -71,7 +103,7 @@ const Todo = ({ navigation }) => {
                 simultaneousHandlers={scrollRef}
                 key={tsks.indexOf(task)}
                 task={task}
-                onDismiss={onDismiss}
+                onDismiss={() => onDismiss(task.id)}
               />
             );
           })}

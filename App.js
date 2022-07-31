@@ -17,20 +17,22 @@ import Todo from "./src/screens/Todos";
 import AddForm from "./src/screens/AddForm";
 
 import { ContextProvider } from "./src/context/ContextProvider";
-import LiquidSwipe from "./src/LiquidSwipe/index";
 import BtmS from "./src/screens/BtmS";
-
+import bse from "./src/screens/Bse";
+import RNSql from "./src/screens/RNSql";
+import Sequel from "./src/sqlite-exmpl/src/Sequel";
 // LogBox.ignoreAllLogs();
-
 const App = () => {
   return (
     <ContextProvider>
       <NavigationContainer>
         <Stack.Navigator screenOptions={{ headerShown: false }}>
-          {/* <Stack.Screen name="ls" component={LiquidSwipe} /> */}
-          <Stack.Screen name="home" component={Home} />
-          <Stack.Screen name="btms" component={BtmS} />
           <Stack.Screen name="todo" component={Todo} />
+          <Stack.Screen name="base" component={bse} />
+          <Stack.Screen name="seq" component={RNSql} />
+          <Stack.Screen name="home" component={Home} />
+          {/* <Stack.Screen name="seql" component={Sequel} /> */}
+          <Stack.Screen name="btms" component={BtmS} />
           <Stack.Screen name="lott" component={Lott} />
           <Stack.Screen name="addForm" component={AddForm} />
         </Stack.Navigator>
